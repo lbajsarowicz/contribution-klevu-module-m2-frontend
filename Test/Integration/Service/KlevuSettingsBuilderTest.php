@@ -178,7 +178,7 @@ class KlevuSettingsBuilderTest extends TestCase
         ]);
         $klevuSettings = $service->execute();
 
-        $this->assertJson(actualJson: $klevuSettings);
+        $this->assertJson($klevuSettings);
         $this->assertSame(expected: '[]', actual: $klevuSettings);
     }
 
@@ -259,7 +259,7 @@ class KlevuSettingsBuilderTest extends TestCase
         $klevuSettings = $service->execute();
 
         $this->assertNotNull(actual: $klevuSettings);
-        $this->assertJson(actualJson: $klevuSettings);
+        $this->assertJson($klevuSettings);
         $this->assertSame(expected: '{"global":[]}', actual: $klevuSettings);
     }
 
@@ -307,7 +307,7 @@ class KlevuSettingsBuilderTest extends TestCase
         ]);
         $klevuSettings = $service->execute();
 
-        $this->assertJson(actualJson: $klevuSettings);
+        $this->assertJson($klevuSettings);
         $this->assertStringContainsString(
             needle: '"global":{"apiKey":"klevu_js_api_key","language":"en"}',
             haystack: $klevuSettings,

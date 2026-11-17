@@ -12,6 +12,7 @@ use Klevu\Frontend\Exception\OutputDisabledException;
 use Klevu\Frontend\Service\IsEnabledDeterminer;
 use Klevu\FrontendApi\Service\IsEnabledCondition\IsEnabledConditionInterface;
 use Magento\Framework\App\State as AppState;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -76,6 +77,7 @@ class IsEnabledDeterminerTest extends TestCase
     /**
      * @dataProvider dataProvider_testExecute_HandlesAndLogic_Disabled
      */
+    #[DataProvider('dataProvider_testExecute_HandlesAndLogic_Disabled')]
     public function testExecute_HandlesAndLogic_Disabled(bool $condition1, bool $condition2, bool $condition3): void
     {
         $this->expectException(OutputDisabledException::class);
@@ -114,7 +116,7 @@ class IsEnabledDeterminerTest extends TestCase
     /**
      * @return bool[][]
      */
-    public function dataProvider_testExecute_HandlesAndLogic_Disabled(): array
+    public static function dataProvider_testExecute_HandlesAndLogic_Disabled(): array
     {
         return [
             [true, true, false],
@@ -129,6 +131,7 @@ class IsEnabledDeterminerTest extends TestCase
     /**
      * @dataProvider dataProvider_testExecute_HandlesOrLogic_Enabled
      */
+    #[DataProvider('dataProvider_testExecute_HandlesOrLogic_Enabled')]
     public function testExecute_HandlesOrLogic_Enabled(bool $condition1, bool $condition2, bool $condition3): void
     {
         $this->mockLogger->expects($this->never())
@@ -166,7 +169,7 @@ class IsEnabledDeterminerTest extends TestCase
     /**
      * @return bool[][]
      */
-    public function dataProvider_testExecute_HandlesOrLogic_Enabled(): array
+    public static function dataProvider_testExecute_HandlesOrLogic_Enabled(): array
     {
         return [
             [true, true, false],
@@ -221,6 +224,7 @@ class IsEnabledDeterminerTest extends TestCase
     /**
      * @dataProvider dataProvider_testExecute_HandlesBothLogics_Enabled
      */
+    #[DataProvider('dataProvider_testExecute_HandlesBothLogics_Enabled')]
     public function testExecute_HandlesBothLogics_Enabled(bool $condition1, bool $condition2, bool $condition3): void
     {
         $this->mockLogger->expects($this->never())
@@ -258,7 +262,7 @@ class IsEnabledDeterminerTest extends TestCase
     /**
      * @return bool[][]
      */
-    public function dataProvider_testExecute_HandlesBothLogics_Enabled(): array
+    public static function dataProvider_testExecute_HandlesBothLogics_Enabled(): array
     {
         return [
             [true, true, false],
@@ -271,6 +275,7 @@ class IsEnabledDeterminerTest extends TestCase
     /**
      * @dataProvider dataProvider_testExecute_HandlesBothLogics_Disabled
      */
+    #[DataProvider('dataProvider_testExecute_HandlesBothLogics_Disabled')]
     public function testExecute_HandlesBothLogics_Disabled(bool $condition1, bool $condition2, bool $condition3): void
     {
         $this->expectException(OutputDisabledException::class);
@@ -310,7 +315,7 @@ class IsEnabledDeterminerTest extends TestCase
     /**
      * @return bool[][]
      */
-    public function dataProvider_testExecute_HandlesBothLogics_Disabled(): array
+    public static function dataProvider_testExecute_HandlesBothLogics_Disabled(): array
     {
         return [
             [true, false, false],
