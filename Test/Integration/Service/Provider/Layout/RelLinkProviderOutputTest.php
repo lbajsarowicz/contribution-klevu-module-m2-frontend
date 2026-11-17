@@ -72,9 +72,9 @@ class RelLinkProviderOutputTest extends AbstractController
         /** @var HttpResponse $response */
         $response = $this->getResponse();
         $this->assertSame(200, $response->getHttpResponseCode());
-        $this->assertStringNotMatchesFormat(
-            format: '<link%wrel="preconnect"%whref="https://js.klevu.com"%w>',
-            string: $response->getBody(),
+        $this->assertThat(
+            $response->getBody(),
+            $this->logicalNot($this->matches('<link%wrel="preconnect"%whref="https://js.klevu.com"%w>')),
         );
     }
 }

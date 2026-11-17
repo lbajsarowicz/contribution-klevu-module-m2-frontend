@@ -178,7 +178,7 @@ class KlevuSettingsBuilderTest extends TestCase
         ]);
         $klevuSettings = $service->execute();
 
-        $this->assertJson(actualJson: $klevuSettings);
+        $this->assertJson($klevuSettings);
         $this->assertSame(expected: '[]', actual: $klevuSettings);
     }
 
@@ -259,7 +259,7 @@ class KlevuSettingsBuilderTest extends TestCase
         $klevuSettings = $service->execute();
 
         $this->assertNotNull(actual: $klevuSettings);
-        $this->assertJson(actualJson: $klevuSettings);
+        $this->assertJson($klevuSettings);
         $this->assertSame(expected: '{"global":[]}', actual: $klevuSettings);
     }
 
@@ -307,34 +307,34 @@ class KlevuSettingsBuilderTest extends TestCase
         ]);
         $klevuSettings = $service->execute();
 
-        $this->assertJson(actualJson: $klevuSettings);
+        $this->assertJson($klevuSettings);
         $this->assertStringContainsString(
             needle: '"global":{"apiKey":"klevu_js_api_key","language":"en"}',
             haystack: $klevuSettings,
         );
-        $this->assertStringNotMatchesFormat(
-            format: '"search":{%A"placeholder":"Override"%A}',
-            string: $klevuSettings,
+        $this->assertThat(
+            $klevuSettings,
+            $this->logicalNot($this->matches('"search":{%A"placeholder":"Override"%A}')),
         );
-        $this->assertStringNotMatchesFormat(
-            format: '"search":{%A"maxChars":256%A}',
-            string: $klevuSettings,
+        $this->assertThat(
+            $klevuSettings,
+            $this->logicalNot($this->matches('"search":{%A"maxChars":256%A}')),
         );
-        $this->assertStringNotMatchesFormat(
-            format: '"search":{%A"showQuickOnEnter":true%A}',
-            string: $klevuSettings,
+        $this->assertThat(
+            $klevuSettings,
+            $this->logicalNot($this->matches('"search":{%A"showQuickOnEnter":true%A}')),
         );
-        $this->assertStringNotMatchesFormat(
-            format: '"url":{%A"queryParam":"query"%A}',
-            string: $klevuSettings,
+        $this->assertThat(
+            $klevuSettings,
+            $this->logicalNot($this->matches('"url":{%A"queryParam":"query"%A}')),
         );
-        $this->assertStringNotMatchesFormat(
-            format: '"url":{%A"search":"https:\/\/klevu-search.url\/cs\/v2\/search"%A}',
-            string: $klevuSettings,
+        $this->assertThat(
+            $klevuSettings,
+            $this->logicalNot($this->matches('"url":{%A"search":"https:\/\/klevu-search.url\/cs\/v2\/search"%A}')),
         );
-        $this->assertStringNotMatchesFormat(
-            format: '"url":{%A"landing":"\/catalogsearch\/result"%A}',
-            string: $klevuSettings,
+        $this->assertThat(
+            $klevuSettings,
+            $this->logicalNot($this->matches('"url":{%A"landing":"\/catalogsearch\/result"%A}')),
         );
         $this->assertStringContainsString(
             needle: '"console":{"level":4}',
